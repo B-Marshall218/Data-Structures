@@ -24,7 +24,7 @@ implementing a Stack?'''
 #     def push(self, value):
 #         self.size += 1
 #         self.storage.append(value)
-#         return self.storage
+#         # return self.storage
 
 #     def pop(self):
 #         if (self.size) == 0:

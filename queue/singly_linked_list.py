@@ -64,6 +64,6 @@ class LinkedList:
             self.tail = None
             return value
         else:
-            value = self.head.get_values()
+            value = self.head.get_value()
             self.head = self.head.get_next()
             return value

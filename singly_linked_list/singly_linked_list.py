@@ -30,6 +30,7 @@ class LinkedList:
     def remove_tail(self):
         if self.head is None and self.tail is None:
             return None
+            # If list is empty, why are we returning none?
         if self.head == self.tail:
             # When/how would the head be the same as the tail?
             value = self.tail.get_value()
@@ -64,6 +65,6 @@ class LinkedList:
             self.tail = None
             return value
         else:
-            value = self.head.get_values()
+            value = self.head.get_value()
             self.head = self.head.get_next()
             return value
