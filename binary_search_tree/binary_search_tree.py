@@ -1,7 +1,7 @@
 """
-Binary search trees are a data structure that enforce an ordering over 
-the data they store. That ordering in turn makes it a lot more efficient 
-at searching for a particular piece of data in the tree. 
+Binary search trees are a data structure that enforce an ordering over
+the data they store. That ordering in turn makes it a lot more efficient
+at searching for a particular piece of data in the tree.
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
    on the BSTNode class.
@@ -25,15 +25,33 @@ class BSTNode:
     # Insert the given value into the tree
     def insert(self, value):
         # check if the new nodes value is less than the current nodes value
-        if self.value < value:
+        if self.value > value:
+            if self.left is not None:
+                # make that (left) node, call insert
+                self.left.insert(value)
+            else:
+                # set the left to the new node with the new value
+                self.left = BSTNode(value)
+
+        # elif new value >= self.value
+        if self.value <= value:
+            # if self.right is already taken by node
+            if self.right is not None:
+                # make that (right) node call insert
+                self.right.insert(value)
+            # set the right child to the new node with new value
+            else:
+                self.right = BSTNode(value)
+                return True
+            """
             # if there is no left child already here
             # add the new node to the left
-            if self.left is None:
+            if self.left != None:
                 self.left.insert(value)
                 # create a BSTNode and encapsulate the value in it then set it to the left
                 # otherwise call insert on the left node
             else:
-                self.left.BSTNode(value)
+                self.left = BSTNode(value)
                 # otherwise (the new nodes value is greaterthan or equal to the current node value)
         if self.value >= value:
             # if there is no right child already here
@@ -43,9 +61,9 @@ class BSTNode:
                 # create a BSTNode and encapsulate the value in it then set it to the right
                 # otherwise call insert on the right node
             else:
-                self.right.BSTNode(value)
+                self.right = BSTNode(value)
                 return True
-
+        """
     # Return True if the tree contains the value
     # False if it does not
 
@@ -55,7 +73,7 @@ class BSTNode:
         if self.value is target:
             return True
             # check if the target is less than the current nodes value
-        if self.value < target:
+        if self.value > target:
             # if there is no left child already here
             # return False
             if self.left is None:
@@ -64,7 +82,7 @@ class BSTNode:
             # return a call of contains on the left child passing in the target value
             result = self.left.contains(target)
         # otherwise (the target is greater than the current nodes value)
-        if self.value > target:
+        if self.value < target:
             # if there is no right child already here
             # return False
             if self.right is None:
@@ -93,8 +111,8 @@ class BSTNode:
 
         # get a ref to the current node
         while current:
-            if current > max_val:
-                max_val = current.right
+            if current.value > max_val:
+                max_val = current.value
             current = current.right
         return max_val
 
@@ -107,6 +125,14 @@ class BSTNode:
     # Call the function `fn` on the value of each node
 
     def for_each(self, fn):
+        if self.value is None:
+            pass
+        else:
+            fn(self.value)
+            if self.left is not None:
+                self.left.for_each(fn)
+            if self.right is not None:
+                self.right.for_each(fn)
         # call the function passing in the current nodes value
 
         # if there is a node to the left
@@ -114,7 +140,6 @@ class BSTNode:
 
         # if there is a node to the right
         # call the function on the right node
-        pass
 
     # Part 2 -----------------------
 
