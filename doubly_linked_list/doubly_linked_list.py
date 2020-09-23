@@ -137,22 +137,23 @@ class DoublyLinkedList:
 
     def delete(self, node):
         if not self.head and not self.tail:
-            if self.head is self.tail:
-                self.head = None
-                self.tail = None
+            return
+        if self.head is self.tail:
+            self.head = None
+            self.tail = None
 
-            elif self.head is node:
-                self.head = node.next
-                node.nodeDelete()
+        elif self.head is node:
+            self.head = node.next
+            node.nodeDelete()
 
-            elif self.tail is node:
-                self.tail = node.prev
-                node.nodeDelete()
+        elif self.tail is node:
+            self.tail = node.prev
+            node.nodeDelete()
 
-            else:
-                node.nodeDelete()
+        else:
+            node.nodeDelete()
 
-            self.length -= 1
+        self.length -= 1
 
     """
     Finds and returns the maximum value of all the nodes 
